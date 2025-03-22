@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 from typing import List, Union
 from typing_extensions import override
@@ -22,5 +23,8 @@ class FormatParquet(Formatter):
             raise ValueError(f"No valid records to write to Parquet for {self.output_file}")
 
         df: pd.DataFrame = pd.DataFrame([row.model_dump() for row in rows])
+        # Add filename without extension as the datakey
+        filename = os.path.basename(self.wpilog_file)
+        df['datakey'] = os.path.splitext(filename)[0]
         print(f"Total Columns being written to parquet file: {len(df.columns)}")
         df.to_parquet(self.output_file)

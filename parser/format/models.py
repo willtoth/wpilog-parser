@@ -15,6 +15,7 @@ class WideRow(BaseModel, extra=Extra.allow):
     timestamp: float
     entry: int
     type: str
+    loop_count: int
 
 class NestedValue(BaseModel):
     double: Optional[float]
@@ -33,3 +34,4 @@ class LongRow(BaseModel):
     type: str
     json: Optional[Dict[Any, Any]]
     value: Optional[NestedValue]
+    loop_count: int

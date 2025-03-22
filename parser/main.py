@@ -41,8 +41,8 @@ if __name__ == "__main__":
         if not file.endswith('.wpilog'):
             continue
 
-        input_file: str = f"{input_dir}/{file}"
-        output_file: str = f"{input_dir}/{file.split('.')[0]}.parquet"
+        input_file: str = os.path.join(input_dir, file)
+        output_file: str = os.path.join(input_dir, f"{os.path.splitext(file)[0]}.parquet")
 
         if os.path.exists(output_file):
             action, remember = prompt_for_overwrite(output_file, remember_choice)
